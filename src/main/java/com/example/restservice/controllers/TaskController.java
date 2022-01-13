@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +33,19 @@ public class TaskController {
         }
 
         return results;
+    }
+
+    @PostMapping("/tasks")
+    public @ResponseBody Task addTask(@RequestBody Task task) {
+        var mapped = new com.example.storage.entities.Task();
+        mapped.setName(task.getName());
+        mapped.setDueDate(task.getDueDate());
+        mapped.setCompletedDate(task.getCompletedDate());
+
+        var saved = taskRepository.save(mapped);
+        task.setTaskId(saved.getTaskId());
+
+        return task;
     }
 
 }
