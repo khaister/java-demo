@@ -1,7 +1,7 @@
-package com.example.restservice.controllers;
+package app.todo.webapi.controllers;
 
-import com.example.restservice.models.Task;
-import com.example.storage.TaskRepository;
+import app.todo.storage.TaskRepository;
+import app.todo.webapi.models.Task;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class TaskController {
     public @ResponseBody Iterable<Task> getTasks() {
         var tasks = taskRepository.findAll();
         var results = new ArrayList<Task>();
-        for (com.example.storage.entities.Task task : tasks) {
+        for (app.todo.storage.entities.Task task : tasks) {
             var mapped = new Task();
             mapped.setTaskId(task.getTaskId());
             mapped.setName(task.getName());
@@ -37,7 +37,7 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public @ResponseBody Task addTask(@RequestBody Task task) {
-        var mapped = new com.example.storage.entities.Task();
+        var mapped = new app.todo.storage.entities.Task();
         mapped.setName(task.getName());
         mapped.setDueDate(task.getDueDate());
         mapped.setCompletedDate(task.getCompletedDate());

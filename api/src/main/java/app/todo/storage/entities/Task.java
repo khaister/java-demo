@@ -1,8 +1,16 @@
-package com.example.restservice.models;
+package app.todo.storage.entities;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taskId;
 
     private String name;
@@ -13,10 +21,6 @@ public class Task {
 
     public Integer getTaskId() {
         return taskId;
-    }
-
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
     }
 
     public String getName() {
